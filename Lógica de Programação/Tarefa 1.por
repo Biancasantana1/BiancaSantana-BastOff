@@ -8,9 +8,10 @@ programa {
         inteiro salario = 500
 
         limpa()
-        escreva("Seja bem-vindo ao sistema\n\n")
+        escreva("***** Seja bem-vindo ao sistema *****\n\n")
 
         faca {
+        	  escreva("*** Digite apenas letras *** \n")
             escreva("Digite o nome do funcionário: ")
             leia(nome_funcionario)
             // verifica se o nome é uma cadeia de caracter
@@ -19,7 +20,7 @@ programa {
                 escreva("Você digitou um nome não aceitável, por favor, digite novamente: ")
                 leia(nome_funcionario)
             }
-
+		  escreva("\n*** Digite apenas numeros inteiros positivos *** \n")
             escreva("Digite a quantidade de software que foi vendido pelo funcionário: ")
             leia(quantidade_software)
 		  // verifica se é um numero inteiro e positivo
@@ -29,7 +30,7 @@ programa {
             }
 		  // faz a soma do salario total
             real salario_total = salario + 50.00 * tipo.cadeia_para_inteiro(quantidade_software, 10)
-            escreva("O salário final do vendedor ", nome_funcionario, " é de R$ ", salario_total, "\n\n")
+            escreva("\nO salário final do vendedor ", nome_funcionario, " é de R$ ", salario_total, "\n\n")
 
             escreva("Deseja monitorar outro funcionário? (s/n): ")
             leia(deseja_continuar)
@@ -51,7 +52,7 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1819; 
+ * @POSICAO-CURSOR = 1494; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
