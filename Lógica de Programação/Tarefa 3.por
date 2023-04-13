@@ -5,7 +5,6 @@ programa {
         cadeia salario_pessoa
         cadeia valor_financiamento
         cadeia deseja_continuar
-        cadeia quantidade_gasolina
 
         limpa()
         escreva("***** Seja bem-vindo ao sistema de financiamento ***** \n")
@@ -55,7 +54,7 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1437; 
+ * @POSICAO-CURSOR = 318; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
