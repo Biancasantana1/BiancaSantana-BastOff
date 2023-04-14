@@ -7,10 +7,8 @@ programa {
         cadeia valor_cheque
         cadeia deseja_continuar
         
-
         limpa()
         escreva("***** Seja bem-vindo ao sistema de desconto de cheques ***** \n")
-	   
 	   
         faca {
         	  escreva("  *** Digite valores apenas em decimais ***\n\n")
@@ -57,7 +55,7 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1348; 
+ * @POSICAO-CURSOR = 935; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
