@@ -1,0 +1,42 @@
+Metodologia Agil
+Três pilares: Transparencia, inspeção e adaptação
+
+A entrega da sprint tem que ter valor, que ele saia utilizando
+
+Fluxo: Negocia com cliente --> cria a historia --> constroi o backlog --> sprint planning --> sprint backlog --> daily --> review --> Retrospectiva
+
+Fluxo: Planejamento da sprint --> Reunioes diarias --> Review --> Retrospectiva
+ 
+A sprint é dada como entregue apenas se todos os membros entregar e ter feito os testes
+
+PIO do projeto(product owner): Responsavel pelo negocio, quais as telas, onde será lançado, como vai entregar isso
+
+Tech leader(scrum master): Responsavel por tirar o empedimento do time, ajudar o time
+
+Time: Front, back, mobile. O time tem que ter coragem, foco, comprometimento, respeito e abertura.
+
+Cerimonias:
+Planejamento da sprint: 2 a 4 semanas
+
+Objetivo do planejamento da sprint: Garantir a meta da Sprint e tarefas para aringir a meta da Sprint
+
+Reunião diaria: Todos os dias e fala os acontecimentos
+
+Revisão da sprint: Aprensenta o que fez nas duas semanas e faz a entrega da sprint
+
+Retrospectiva da sprint: Fala os pontos positivos e negativos da sprint
+
+Ciclo PDCA: Planejamento --> Execução --> Check --> Ação
+
+Burn Down: Grafico pontos estimados da sprint x dias da sprint
+
+Definition Of Done (Definição de pronto): Cria durante a primeira sessão de sprint, antes do projeto, todos do times
+
+Planning Poker: Numeração das historias, fibonnaci 1, 2, 3, 5, 8, 13, 20, 40, 100
+
+Kanban: A iniciar, em andamento, concluido, alerta
+   --> historia, esperando para entrar, esta sendo executado, teste, concluido
+
+Historia: eu, enquanto<quem>
+	  quero, <o que>
+	  para, <porque>

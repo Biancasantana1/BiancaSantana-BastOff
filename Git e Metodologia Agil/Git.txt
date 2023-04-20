@@ -1,0 +1,34 @@
+﻿Git 
+* Sistema de controle de versões
+* Objetivo documentar e armazenar informações
+* Documenta através de commits
+GitHub 
+* Redes sociais de projetos
+
+Comandos 
+Mudança de conta 
+* git config –global user.email “meu email”
+Mudança de editor de texto
+* git config –global core.editor “caminho executável do editor”
+* git init
+* git add .  → adiciona o arquivo ao container
+* git status → verifica se algo foi modificado
+* git commit -m “comentário”
+* git log  ou git log – oneline → mostra identificação do commit
+* git branch → identifica o ramo que o projeto se encontra
+* git checkout (nome da chave do commit) → volta para a versão que foi passada no nome do commit
+* git checkout master → volta para o commit mais atual
+* git diff → mostra o que foi modificado no arquivo antes de usar git add .
+* git checkout (nome do arquivo) → desfaz as alterações antes de usar git add .
+* git reset HEAD → remove o conteúdo do container
+* git reset –hard (nome da chave do commit) → remove o conteúdo do container
+* git checkout -b (nome do ramo) → cria um novo ramo
+* git log –oneline –graph –all → ver todas brachs e ramos
+* git merge (nome do ramo)
+* git remote 
+* git fetch → faz o download das alterações que estão no repositorio remoto para poder fazer uma analise do que foi modificado e resolver os problemas de conflito
+* git commit –amend → podemos reescreve a mensagem do ultimo commit
+* git merge –continue → 
+Grafo de commits fica dentro da pasta objects
+HEAD é o último commit
+A rebase ela pega tudo que foi feito e joga para o topo, ou seja, reescreve no historico 
