@@ -16,7 +16,9 @@ void main() {
       idades.add(lerIdade()!);
     }
 
-    double mediaIdade = idades.reduce((a, b) => a + b) / qtdPessoas;
+    double mediaIdade =
+        idades.reduce((acumulador, proximo) => acumulador + proximo) /
+            qtdPessoas;
     String classificacao = "";
 
     if (mediaIdade <= 25) {

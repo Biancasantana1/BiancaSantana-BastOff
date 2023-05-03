@@ -27,9 +27,9 @@ void main() {
     clearConsole();
     print('Primeira nota: $notasParciais1');
     print('Segunda nota: $notasParciais2');
-    media = calcularMedia(notasParciais1!, notasParciais2!)..toStringAsFixed(2);
+    media = calcularMedia(notasParciais1!, notasParciais2!);
     conceito = calcularConceito(media);
-    print('A media é $media');
+    print('A media é ${media.toStringAsFixed(2)}');
     print('O conceito é $conceito');
     if (conceito == 'A' || conceito == 'B' || conceito == 'C') {
       print('APROVADO');

@@ -14,7 +14,6 @@ void main() {
     } else {
       print('Data inválida!');
     }
-
     continuar = lerContinuar()!;
     clearConsole();
   }
@@ -23,11 +22,16 @@ void main() {
 String? lerData() {
   bool dataValida = false;
   while (!dataValida) {
-    print('Digite a data (formato: AA/BB/CCCC):');
-    String data = stdin.readLineSync()!;
-    if (ehValidaDataFormato(data)) {
+    print('Digite a data (formato: DD/MM/AAAA):');
+    String? data = stdin.readLineSync();
+    if (data != null && ehValidaDataFormato(data)) {
       dataValida = true;
-      return data;
+      String? dataExtenso = dataPorExtenso(data);
+      if (dataExtenso != null) {
+        return dataExtenso;
+      } else {
+        return null;
+      }
     } else {
       print('Data inválida! ');
     }
@@ -75,7 +79,7 @@ String? dataPorExtenso(String data) {
     return null;
   }
 
-  if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1) {
+  if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1500 || ano > 2200) {
     return null;
   }
 

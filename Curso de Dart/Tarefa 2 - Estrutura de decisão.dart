@@ -61,7 +61,7 @@ double? lerNumero() {
       numeroValido = true;
       return numero;
     } else {
-      print('Peso invalido! Digite novamente.');
+      print('Número invalido! Digite novamente.');
     }
   }
 }

@@ -19,8 +19,6 @@ void main() {
       alturaMaisBaixo,
       pesoMaisGordo,
       pesoMaisMagro;
-  bool alturaValida = false;
-  bool pesoValido = false;
   double somaAlturas = 0, somaPesos = 0;
   int quantidadeClientes = 0;
   List<int> codigosInseridos = [];
@@ -137,7 +135,7 @@ double? lerPeso() {
     double? peso = double.tryParse(stdin.readLineSync()!);
     if (peso == null) {
       print('Entrada inválida! Digite novamente.');
-    } else if (peso > 20 && peso <= 250) {
+    } else if (peso > 20 && peso <= 595) {
       pesoValido = true;
       return peso;
     } else {
