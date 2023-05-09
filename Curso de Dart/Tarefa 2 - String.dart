@@ -9,32 +9,49 @@ void main() {
   bool continuar = true;
 
   while (continuar) {
-    print('******** Sistema de Tamanho de String ******** ');
-    print('Insira o CPF:');
+    print('******** Sistema de Verificação de CPF ******** ');
+    print('Insira o CPF no formato xxx.xxx.xxx-xx :');
     String cpf = stdin.readLineSync()!;
-    /*if (cpfFormatoValido(cpf)) {
-      print('Numero de CPF válido!');
+    if (cpfFormatoValido(cpf)) {
+      print('Número de CPF válido!');
     } else {
-      print('Numero de CPF inválido!');
+      print('Número de CPF inválido!');
     }
-*/
     continuar = lerContinuar()!;
     clearConsole();
   }
 }
 
-/*bool cpfFormatoValido(String cpf) {
-  RegExp regex = RegExp(r'^\d{3}.\d{3}.\d{3}-\d{2}$');
-  if (regex.hasMatch(cpf)) return false;
+bool cpfFormatoValido(String cpf) {
+  RegExp regex = RegExp(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$');
+  if (!regex.hasMatch(cpf)) {
+    return false;
+  }
+  cpf = cpf.replaceAll(".", "").replaceAll("-", "");
 
-  var cpfAux = cpf.replaceAll(RegExp(r'[^\d]'), '');
-  // var cpfAux = cpf.replaceAll("-", "");
-  // cpfAux = cpf.replaceAll(".", "");
+  if (RegExp(r'^(\d)\1{10}$').hasMatch(cpf)) return false;
 
-  if (cpfAux.length != 11) return false;
+  List<int> digitos = cpf.split('').map((d) => int.parse(d)).toList();
+  int digito1 = calcularDigitoVerificador(digitos.sublist(0, 9));
+  int digito2 = calcularDigitoVerificador(digitos.sublist(0, 9) + [digito1]);
 
-  if (RegExp(r'^(\d)\1{10}$').hasMatch(cpfAux)) return false;
-}*/
+  return digitos[9] == digito1 && digitos[10] == digito2;
+}
+
+int calcularDigitoVerificador(List<int> digitos) {
+  int soma = 0;
+
+  for (int i = 0; i < digitos.length; i++) {
+    soma += digitos[i] * (digitos.length + 1 - i);
+  }
+  int resto = soma % 11;
+
+  if (resto < 2) {
+    return 0;
+  } else {
+    return 11 - resto;
+  }
+}
 
 bool? lerContinuar() {
   bool opcaoValida = false;
