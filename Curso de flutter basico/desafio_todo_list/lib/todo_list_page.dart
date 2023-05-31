@@ -20,28 +20,30 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(24),
-        child: Column(children: [
-          TextField(
-            controller: _textEditingController,
-          ),
-          Container(
-            height: 400,
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: tarefas.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(tarefas[index]),
-                  onLongPress: () {
-                    setState(() {
-                      tarefas.removeAt(index);
-                    });
-                  },
-                );
-              },
+        child: SingleChildScrollView(
+          child: Column(children: [
+            TextField(
+              controller: _textEditingController,
             ),
-          ),
-        ]),
+            Container(
+              height: 400,
+              child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: tarefas.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(tarefas[index]),
+                    onLongPress: () {
+                      setState(() {
+                        tarefas.removeAt(index);
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+          ]),
+        ),
       ),
       floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
