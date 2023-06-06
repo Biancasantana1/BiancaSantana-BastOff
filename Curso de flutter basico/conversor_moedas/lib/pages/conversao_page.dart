@@ -1,10 +1,8 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
-import '../model/usd_model.dart';
+import 'package:flutter/material.dart';
+import '../model/moeda_model.dart';
 
 class ConversaoPage extends StatefulWidget {
-  final USD currency;
+  final Moeda currency;
 
   const ConversaoPage({Key? key, required this.currency}) : super(key: key);
 

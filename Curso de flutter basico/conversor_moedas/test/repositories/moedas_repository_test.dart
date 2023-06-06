@@ -8,5 +8,6 @@ void main() {
       DioServiceImp()
     );
      final result = await moedas.getMoedas();
+     print(result.results.currencies.currencyMap.length);
   });
 }

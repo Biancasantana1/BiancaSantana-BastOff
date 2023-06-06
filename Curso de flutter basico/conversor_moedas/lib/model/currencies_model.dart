@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:conversor_moedas/model/usd_model.dart';
+import 'package:conversor_moedas/model/moeda_model.dart';
 
 class Currencies {
   Currencies({
@@ -9,14 +7,14 @@ class Currencies {
   });
 
   final String source;
-  final Map<String, USD> currencyMap;
+  final Map<String, Moeda> currencyMap;
 
   Currencies.fromJson(Map<String, dynamic> json)
       : source = json['source'],
         currencyMap = {} {
     for (final entry in json.entries) {
       if (entry.key != 'source') {
-        currencyMap[entry.key] = USD.fromJson(entry.value);
+        currencyMap[entry.key] = Moeda.fromJson(entry.value);
       }
     }
   }

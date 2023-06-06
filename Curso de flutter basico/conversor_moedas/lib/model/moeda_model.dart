@@ -1,5 +1,5 @@
-class USD {
-  USD({
+class Moeda {
+  Moeda({
     required this.name,
     required this.buy,
     required this.sell,
@@ -10,7 +10,7 @@ class USD {
   late final double? sell;
   late final double variation;
 
-  USD.fromJson(Map<String, dynamic> json) {
+  Moeda.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     buy = json['buy'];
     sell = json['sell'];
