@@ -10,7 +10,7 @@ class CustomCurrencyListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 57,
+      height: 58,
       margin: const EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.0),

@@ -17,6 +17,7 @@ class CustomCurrencyListWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(0.0, 12, 0.0, 12.0),
         itemCount: currencies?.length ?? 0,
         itemBuilder: (_, idx) => InkWell(
           onTap: () {

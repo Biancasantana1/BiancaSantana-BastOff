@@ -11,8 +11,9 @@ class MoedasRepositoryImp implements MoedasRepository {
   @override
   Future<Moedas> getMoedas() async {
     try {
-      var response =
-          await _dioService.getDio().get('https://api.hgbrasil.com/finance');
+      var response = await _dioService
+          .getDio()
+          .get('https://api.hgbrasil.com/finance?key=d46e971e');
       if (response.statusCode == 200) {
         var moedas = Moedas.fromJson(response.data);
         return moedas;

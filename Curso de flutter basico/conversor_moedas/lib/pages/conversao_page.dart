@@ -14,6 +14,6 @@ class _ConversaoPageState extends State<ConversaoPage> {
   @override
   Widget build(BuildContext context) {
     // Você pode acessar a moeda com widget.currency
-    return Placeholder();
+    return Container();
   }
 }
