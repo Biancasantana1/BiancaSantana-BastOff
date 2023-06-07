@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.1.2
   lottie: ^1.2.0
+  page_transition: ^2.0.4
+  flutter_launcher_icons: "^0.9.2"
+
 
 
 dev_dependencies:
@@ -63,6 +66,11 @@ flutter:
   assets:
     - assets/lottie.json
     - assets/img/
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/img/icon.png"  # substitua isso pelo caminho para o seu ícone
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
