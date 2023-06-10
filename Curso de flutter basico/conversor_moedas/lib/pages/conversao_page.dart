@@ -1,7 +1,8 @@
+import 'package:conversor_moedas/controllers/conversao_controller.dart';
+import 'package:conversor_moedas/model/moeda_model.dart';
 import 'package:conversor_moedas/widgets/custom_background_widget.dart';
 import 'package:conversor_moedas/widgets/custom_header_widget.dart';
 import 'package:flutter/material.dart';
-import '../model/moeda_model.dart';
 
 class ConversaoPage extends StatefulWidget {
   final Moeda currency;
@@ -13,38 +14,31 @@ class ConversaoPage extends StatefulWidget {
 }
 
 class _ConversaoPageState extends State<ConversaoPage> {
-  final TextEditingController _controller = TextEditingController();
-  double? _result;
+  late final ConversaoController _conversaoController;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_updateResult);
+    _conversaoController = ConversaoController();
+    _conversaoController.controller.addListener(() {
+      setState(() {
+        _conversaoController.updateResult(widget.currency.buy);
+      });
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _conversaoController.dispose();
     super.dispose();
-  }
-
-  void _updateResult() {
-    if (_controller.text.isNotEmpty) {
-      final double value = double.tryParse(_controller.text) ?? 0.0;
-      setState(() {
-        _result = value * widget.currency.buy;
-      });
-    } else {
-      setState(() {
-        _result = null;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    String currencySymbol =
+        _conversaoController.currencySymbols[widget.currency.name] ?? '';
     return Scaffold(
       body: Stack(
         children: [
@@ -64,27 +58,25 @@ class _ConversaoPageState extends State<ConversaoPage> {
                     child: Column(
                       children: [
                         TextField(
-                          controller: _controller,
+                          controller: _conversaoController.controller,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: 'Quantidade em ${widget.currency.name}',
+                            prefixText: '$currencySymbol: ',
                           ),
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
                         ),
                         const SizedBox(height: 24.0),
-                        if (_result != null)
-                          Container(
-                            child: TextField(
-                              enabled:
-                                  false, // desabilita a edição do TextField
-                              controller: TextEditingController()
-                                ..text =
-                                    'R\$: ${_result!.toStringAsFixed(2)}', // define o valor do resultado
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Resultado em reais',
-                              ),
+                        if (_conversaoController.result != null)
+                          TextField(
+                            enabled: false,
+                            controller: TextEditingController()
+                              ..text =
+                                  'R\$: ${_conversaoController.result!.toStringAsFixed(2)}',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Resultado em reais',
                             ),
                           ),
                       ],
