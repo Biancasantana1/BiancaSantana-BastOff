@@ -13,7 +13,7 @@ class ConversaoPage extends StatefulWidget {
 }
 
 class _ConversaoPageState extends State<ConversaoPage> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   double? _result;
 
   @override
@@ -43,50 +43,57 @@ class _ConversaoPageState extends State<ConversaoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       body: Stack(
         children: [
           CustomBackgroundWidget(child: Container()),
-          Column(
-            children: [
-              CustomHeaderWidget(),
-              Container(
-                margin: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 24.0),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: _controller,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Quantidade em ${widget.currency.name}',
-                        ),
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                      ),
-                      SizedBox(
-                          height:
-                              24.0), // Espaço entre o TextField e o resultado.
-                      if (_result != null)
-                        Text(
-                          'Resultado da conversão: \$${_result!.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                if (!isLandscape) const CustomHeaderWidget(),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 24.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: 'Quantidade em ${widget.currency.name}',
                           ),
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
                         ),
-                    ],
+                        const SizedBox(height: 24.0),
+                        if (_result != null)
+                          Container(
+                            child: TextField(
+                              enabled:
+                                  false, // desabilita a edição do TextField
+                              controller: TextEditingController()
+                                ..text =
+                                    'R\$: ${_result!.toStringAsFixed(2)}', // define o valor do resultado
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Resultado em reais',
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-// ...
         ],
       ),
     );
