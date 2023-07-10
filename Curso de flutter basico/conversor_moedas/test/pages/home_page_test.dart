@@ -32,9 +32,15 @@ void main() {
 
   testWidgets('Testando renderização do widget Lottie',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-        home:
-            Scaffold(body: Center(child: Lottie.asset('assets/lottie.json')))));
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Lottie.asset('assets/lottie.json'),
+          ),
+        ),
+      ),
+    );
 
     expect(find.byType(Lottie), findsOneWidget);
   });
@@ -43,11 +49,15 @@ void main() {
       (WidgetTester tester) async {
     final result = await moedas.getMoedas();
 
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(
+      MaterialApp(
         home: Scaffold(
-            body: CustomCurrencyListWidget(currencies: [
-      result.results.currencies.currencyMap.values.first
-    ]))));
+          body: CustomCurrencyListWidget(
+            currencies: [result.results.currencies.currencyMap.values.first],
+          ),
+        ),
+      ),
+    );
     expect(find.byType(CustomCurrencyListItem), findsOneWidget);
     expect(find.text('Dollar'), findsOneWidget);
     expect(find.byType(Lottie), findsNothing);

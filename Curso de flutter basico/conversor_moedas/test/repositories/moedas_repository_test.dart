@@ -3,7 +3,9 @@ import 'package:conversor_moedas/service/dio_service_imp.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final moedas = MoedasRepositoryImp(DioServiceImp());
+  final moedas = MoedasRepositoryImp(
+    DioServiceImp(),
+  );
 
   test('Testando conexão com API', () async {
     final result = await moedas.getMoedas();
