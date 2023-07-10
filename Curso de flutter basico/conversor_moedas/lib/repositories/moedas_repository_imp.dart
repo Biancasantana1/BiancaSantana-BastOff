@@ -20,12 +20,9 @@ class MoedasRepositoryImp implements MoedasRepository {
       } else {
         throw Exception('Erro de status code: ${response.statusCode}');
       }
-    } on DioError catch (e) {
-      print(e.response?.data);
-      print(e.response?.statusCode);
+    } on DioError {
       throw Exception('Erro de conexão ao obter as moedas');
     } catch (error) {
-      print(error.toString());
       throw Exception('Erro desconhecido ao obter as moedas');
     }
   }

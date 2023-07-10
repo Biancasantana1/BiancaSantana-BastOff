@@ -4,7 +4,8 @@ class CustomErrorWidget extends StatelessWidget {
   final String errorMessage;
   final VoidCallback onRetry;
 
-  CustomErrorWidget({required this.errorMessage, required this.onRetry});
+  const CustomErrorWidget(
+      {super.key, required this.errorMessage, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -12,26 +13,26 @@ class CustomErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             color: Colors.red,
             size: 50.0,
           ),
-          SizedBox(height: 10.0),
-          Text(
+          const SizedBox(height: 10.0),
+          const Text(
             'Error Ocorrido!',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             errorMessage,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16.0),
+            style: const TextStyle(fontSize: 16.0),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           ElevatedButton(
             onPressed: onRetry,
-            child: Text('Recarregar'),
+            child: const Text('Recarregar'),
           ),
         ],
       ),

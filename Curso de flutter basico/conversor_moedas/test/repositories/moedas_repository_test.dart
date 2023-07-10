@@ -9,5 +9,6 @@ void main() {
     final result = await moedas.getMoedas();
     expect(result.results.currencies.currencyMap.isNotEmpty, equals(true));
     expect(result.results.currencies.currencyMap.length, equals(9));
+    expect(result.results.currencies.currencyMap.values.first.buy, isNot(10.0));
   });
 }

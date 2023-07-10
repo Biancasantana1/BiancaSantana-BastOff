@@ -11,7 +11,7 @@ import 'package:lottie/lottie.dart';
 import '../model/moeda_model.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

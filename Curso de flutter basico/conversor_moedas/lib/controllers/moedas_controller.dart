@@ -1,7 +1,6 @@
 import 'package:conversor_moedas/model/moedas_model.dart';
 import 'package:conversor_moedas/repositories/moedas_repository.dart';
 import 'package:flutter/material.dart';
-
 import '../model/moeda_model.dart';
 
 class MoedasController {

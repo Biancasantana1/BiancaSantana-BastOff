@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 class CustomCurrencyListWidget extends StatelessWidget {
   final List<Moeda>? currencies;
 
-  const CustomCurrencyListWidget({Key? key, this.currencies}) : super(key: key);
+  const CustomCurrencyListWidget({super.key, this.currencies});
 
   @override
   Widget build(BuildContext context) {

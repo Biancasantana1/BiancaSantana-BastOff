@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class CustomCurrencyListItem extends StatelessWidget {
   final Moeda currency;
 
-  const CustomCurrencyListItem({Key? key, required this.currency})
-      : super(key: key);
+  const CustomCurrencyListItem({super.key, required this.currency});
 
   @override
   Widget build(BuildContext context) {

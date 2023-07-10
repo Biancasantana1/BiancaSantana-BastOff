@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class ConversaoPage extends StatefulWidget {
   final Moeda currency;
 
-  const ConversaoPage({Key? key, required this.currency}) : super(key: key);
+  const ConversaoPage({super.key, required this.currency});
 
   @override
   State<ConversaoPage> createState() => _ConversaoPageState();

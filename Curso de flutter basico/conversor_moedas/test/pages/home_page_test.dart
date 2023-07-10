@@ -1,10 +1,11 @@
 import 'package:conversor_moedas/repositories/moedas_repository_imp.dart';
 import 'package:conversor_moedas/service/dio_service_imp.dart';
+import 'package:conversor_moedas/widgets/custom_currency_list_item_widget.dart';
+import 'package:conversor_moedas/widgets/custom_currency_list_widget.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:conversor_moedas/pages/home_page.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -40,17 +41,16 @@ void main() {
 
   testWidgets('Testando renderização da lista de moedas',
       (WidgetTester tester) async {
-    // final result = await moedas.getMoedas();
-    // List<Moeda>? currencies =
-    //     result.results.currencies.currencyMap.values.toList();
+    final result = await moedas.getMoedas();
 
-    await tester.pumpWidget(MaterialApp(home: HomePage()));
-
-    //expect(find.byType(Lottie), findsOneWidget);
-
-    //await tester.pump(Duration(seconds: 8));
-
-    // expect(find.byType(CustomCurrencyListItem), findsNothing);
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: CustomCurrencyListWidget(currencies: [
+      result.results.currencies.currencyMap.values.first
+    ]))));
+    expect(find.byType(CustomCurrencyListItem), findsOneWidget);
+    expect(find.text('Dollar'), findsOneWidget);
+    expect(find.byType(Lottie), findsNothing);
   });
 }
 
