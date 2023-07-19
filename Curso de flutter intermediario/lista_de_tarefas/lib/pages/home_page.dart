@@ -33,13 +33,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _toggleTaskStatus(int index) {
-    setState(() {
-      _controller.toggleTaskStatus;
-    });
-    _controller.taskStorage.saveTasks(_controller.tasks);
-  }
-
   @override
   void initState() {
     super.initState();
