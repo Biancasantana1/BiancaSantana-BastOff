@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veterinario/widget/custom_search_widget.dart';
 import 'package:veterinario/widget/custom_see_details_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,10 +39,14 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: const [
-          CustomSeeDetailsWidget(),
-        ],
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            const CustomSeeDetailsWidget(),
+            const CustomSearchWidget(),
+          ],
+        ),
       ),
     );
   }
