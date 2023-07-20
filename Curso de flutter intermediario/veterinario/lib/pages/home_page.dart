@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:veterinario/widget/custom_search_widget.dart';
 import 'package:veterinario/widget/custom_see_details_widget.dart';
+import '../widget/custom_select_search_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
 
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +51,7 @@ class HomePage extends StatelessWidget {
           children: [
             const CustomSeeDetailsWidget(),
             const CustomSearchWidget(),
+            CustomSelectSearchWidget(),
           ],
         ),
       ),
