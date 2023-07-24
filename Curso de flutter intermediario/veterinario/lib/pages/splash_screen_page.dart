@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veterinario/utils/assets_images_utils.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({
@@ -11,7 +12,7 @@ class SplashScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Image.asset(
-            'assets/image/Background.png',
+            AssetsImg.background,
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
@@ -27,7 +28,7 @@ class SplashScreen extends StatelessWidget {
                     MediaQuery.of(context).size.width * 0.3,
                     0),
                 child: Image.asset(
-                  'assets/image/Logo.png',
+                  AssetsImg.logo,
                   fit: BoxFit.fitWidth,
                 ),
               ),

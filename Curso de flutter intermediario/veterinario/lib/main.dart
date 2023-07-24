@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:veterinario/pages/home_page.dart';
 import 'package:flutter/services.dart';
 import 'package:veterinario/pages/splash_screen_page.dart';
+import 'controller/filter_controller.dart';
+import 'controller/scheduling_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(const MyApp());
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<FilterController>(
+            create: (_) => FilterController(),
+          ),
+          ChangeNotifierProvider<SchedulingController>(
+            create: (_) => SchedulingController(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
   });
 }
 

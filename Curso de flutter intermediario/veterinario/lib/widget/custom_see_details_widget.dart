@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:veterinario/utils/assets_images_utils.dart';
+import '../pages/details_page.dart';
 
 class CustomSeeDetailsWidget extends StatelessWidget {
   const CustomSeeDetailsWidget({super.key});
@@ -13,7 +15,9 @@ class CustomSeeDetailsWidget extends StatelessWidget {
         color: const Color(0xFF818AF9),
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(
-          image: AssetImage('assets/image/cat_background.png'),
+          image: AssetImage(
+            AssetsImg.catBackground,
+          ),
           fit: BoxFit.cover,
         ),
       ),
@@ -28,10 +32,11 @@ class CustomSeeDetailsWidget extends StatelessWidget {
                   width: 150,
                   height: 65,
                   margin: EdgeInsets.fromLTRB(
-                      MediaQuery.of(context).size.width * 0.05,
-                      0, // MediaQuery.of(context).size.height * 0.01,
-                      MediaQuery.of(context).size.width * 0.05,
-                      0),
+                    MediaQuery.of(context).size.width * 0.05,
+                    0,
+                    MediaQuery.of(context).size.width * 0.05,
+                    0,
+                  ),
                   child: Center(
                     child: RichText(
                       textAlign: TextAlign.left,
@@ -69,12 +74,20 @@ class CustomSeeDetailsWidget extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(
-                      MediaQuery.of(context).size.width * 0.05,
-                      MediaQuery.of(context).size.height * 0.025,
-                      MediaQuery.of(context).size.width * 0.05,
-                      0),
+                    MediaQuery.of(context).size.width * 0.05,
+                    MediaQuery.of(context).size.height * 0.025,
+                    MediaQuery.of(context).size.width * 0.05,
+                    0,
+                  ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsPage(),
+                        ),
+                      );
+                    },
                     child: Container(
                       width: 90,
                       height: 40,
@@ -83,7 +96,9 @@ class CustomSeeDetailsWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
+                        vertical: 10,
+                        horizontal: 10,
+                      ),
                       child: const Text(
                         'See details',
                         style: TextStyle(
