@@ -4,7 +4,10 @@ import 'package:veterinario/utils/assets_images_utils.dart';
 class CustomSearchWidget extends StatefulWidget {
   final Function(String) onSearch;
 
-  const CustomSearchWidget({super.key, required this.onSearch});
+  const CustomSearchWidget({
+    super.key,
+    required this.onSearch,
+  });
 
   @override
   CustomSearchWidgetState createState() => CustomSearchWidgetState();

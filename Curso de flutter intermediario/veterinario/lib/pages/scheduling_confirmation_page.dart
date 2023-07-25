@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import '../controller/scheduling_controller.dart';
 
 class SchedulingConfirmationPage extends StatelessWidget {
-  const SchedulingConfirmationPage({super.key});
+  const SchedulingConfirmationPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,67 +14,96 @@ class SchedulingConfirmationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF757EFA),
-        title: const Text('Confirmação de Agendamento'),
+        title: const Text(
+          'Confirmação de Agendamento',
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Manrope',
+          ),
+        ),
       ),
-      body: ListView.builder(
-        itemCount: appointments.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage(
-                appointments[index].veterinarian.imagePath,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ListView.builder(
+                itemCount: appointments.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(
+                        appointments[index].veterinarian.imagePath,
+                      ),
+                      radius: 30,
+                    ),
+                    title: Text(
+                      appointments[index].veterinarian.name,
+                      style: const TextStyle(
+                        color: Color(0xFF757EFA),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Manrope',
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Data: ${appointments[index].selectedDate}',
+                          style: const TextStyle(
+                            color: Color(0xFF9CA8FB),
+                            fontSize: 12,
+                            fontFamily: 'Manrope',
+                          ),
+                        ),
+                        Text(
+                          'Horário: ${appointments[index].selectedTime}',
+                          style: const TextStyle(
+                            color: Color(0xFF9CA8FB),
+                            fontSize: 12,
+                            fontFamily: 'Manrope',
+                          ),
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Color(0xFF757EFA),
+                      ),
+                      onPressed: () {
+                        schedulingController.removeScheduling(index);
+                      },
+                    ),
+                  );
+                },
               ),
-              radius: 30,
             ),
-            title: Text(
-              appointments[index].veterinarian.name,
-              style: const TextStyle(
-                color: Color(0xFF757EFA),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+          ),
+          Container(
+            width: double.infinity,
+            height: 70,
+            padding: const EdgeInsets.all(10.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF757EFA),
               ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Data: ${appointments[index].selectedDate}',
-                  style: const TextStyle(
-                    color: Color(0xFF9CA8FB),
-                    fontSize: 16,
-                  ),
+              child: const Text(
+                'Confirmar Agendamento',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Manrope',
                 ),
-                Text(
-                  'Horário: ${appointments[index].selectedTime}',
-                  style: const TextStyle(
-                    color: Color(0xFF9CA8FB),
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            trailing: IconButton(
-              icon: const Icon(
-                Icons.delete,
-                color: Color(0xFF757EFA),
               ),
               onPressed: () {
-                schedulingController.removeScheduling(index);
+                schedulingController.confirmAllSchedules();
+                Navigator.pop(context);
               },
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF757EFA),
-        child: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          schedulingController.confirmAllSchedules();
-          Navigator.pop(context);
-        },
+          ),
+        ],
       ),
     );
   }

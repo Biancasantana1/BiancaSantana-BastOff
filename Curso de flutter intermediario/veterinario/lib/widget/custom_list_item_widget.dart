@@ -55,7 +55,9 @@ class CustomListItemWidget extends StatelessWidget {
                 veterinarian.imagePath,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(
+              width: 16,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:veterinario/utils/assets_images_utils.dart';
 
 class CustomNavBarWidget extends StatefulWidget {
-  const CustomNavBarWidget({super.key});
+  const CustomNavBarWidget({
+    super.key,
+  });
 
   @override
   CustomNavBarWidgetState createState() => CustomNavBarWidgetState();

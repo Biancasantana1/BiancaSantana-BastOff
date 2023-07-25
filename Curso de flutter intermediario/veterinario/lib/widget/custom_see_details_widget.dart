@@ -3,7 +3,9 @@ import 'package:veterinario/utils/assets_images_utils.dart';
 import '../pages/details_page.dart';
 
 class CustomSeeDetailsWidget extends StatelessWidget {
-  const CustomSeeDetailsWidget({super.key});
+  const CustomSeeDetailsWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class CustomSelectSearchWidget extends StatefulWidget {
   final Function(String) onSelectedSpecialty;
 
-  const CustomSelectSearchWidget(
-      {super.key, required this.onSelectedSpecialty});
+  const CustomSelectSearchWidget({
+    super.key,
+    required this.onSelectedSpecialty,
+  });
 
   @override
   CustomSelectSearchWidgetState createState() =>

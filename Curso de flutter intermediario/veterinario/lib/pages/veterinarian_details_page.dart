@@ -25,10 +25,16 @@ class VeterinarianDetailsPageState extends State<VeterinarianDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF757EFA),
-        title: const Text('Detalhes do Veterinário'),
+        title: const Text(
+          'Detalhes do Veterinário',
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Manrope',
+          ),
+        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             CircleAvatar(
@@ -37,33 +43,51 @@ class VeterinarianDetailsPageState extends State<VeterinarianDetailsPage> {
               ),
               radius: 70,
             ),
-            const SizedBox(height: 20),
-            Text(
-              widget.veterinarian.name,
-              style: const TextStyle(
-                color: Color(0xFF757EFA),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  widget.veterinarian.name,
+                  style: const TextStyle(
+                    color: Color(0xFF757EFA),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Manrope',
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Image.asset(widget.veterinarian.icon1Path),
+                const SizedBox(width: 5),
+                Image.asset(widget.veterinarian.icon2Path),
+              ],
             ),
             Text(
               widget.veterinarian.specialty,
               style: const TextStyle(
                 color: Color(0xFF9CA8FB),
-                fontSize: 18,
+                fontSize: 14,
+                fontFamily: 'Manrope',
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             ListTile(
               leading: const Icon(
                 Icons.home,
                 color: Color(0xFF757EFA),
               ),
-              title: const Text('Endereço'),
+              title: const Text(
+                'Endereço',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Manrope',
+                ),
+              ),
               subtitle: Text(
                 widget.veterinarian.address,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Manrope',
+                ),
               ),
             ),
             ListTile(
@@ -71,18 +95,29 @@ class VeterinarianDetailsPageState extends State<VeterinarianDetailsPage> {
                 Icons.phone,
                 color: Color(0xFF757EFA),
               ),
-              title: const Text('Telefone'),
+              title: const Text(
+                'Telefone',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Manrope',
+                ),
+              ),
               subtitle: Text(
                 widget.veterinarian.phoneNumber,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Manrope',
+                ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             const Text(
               'Horários Disponíveis',
               style: TextStyle(
                 color: Color(0xFF757EFA),
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Manrope',
               ),
             ),
             ListView.builder(
@@ -90,7 +125,10 @@ class VeterinarianDetailsPageState extends State<VeterinarianDetailsPage> {
               itemCount: widget.veterinarian.availableHours.length,
               itemBuilder: (context, index) {
                 return CheckboxListTile(
-                  secondary: const Icon(Icons.watch_later_outlined),
+                  secondary: const Icon(
+                    Icons.watch_later_outlined,
+                    color: Color(0xFF757EFA),
+                  ),
                   checkColor: Colors.white,
                   activeColor: const Color(0xFF757EFA),
                   title: Text(widget.veterinarian.availableHours[index]),
@@ -128,7 +166,14 @@ class VeterinarianDetailsPageState extends State<VeterinarianDetailsPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF757EFA),
               ),
-              child: const Text('Agendar'),
+              child: const Text(
+                'Agendar',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Manrope',
+                ),
+              ),
             ),
           ],
         ),
