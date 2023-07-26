@@ -5,6 +5,7 @@ import 'package:conversor_moedas/widgets/custom_background_widget.dart';
 import 'package:conversor_moedas/widgets/custom_currency_list_widget.dart';
 import 'package:conversor_moedas/widgets/custom_error_widget.dart';
 import 'package:conversor_moedas/widgets/custom_header_widget.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -32,8 +33,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _reloadData() {
-    _fetchData;
-    setState(() {});
+    try {
+      _fetchData;
+      setState(() {});
+    } catch (e, stackTrace) {
+      FirebaseCrashlytics.instance.recordError(e, stackTrace);
+    }
   }
 
   @override

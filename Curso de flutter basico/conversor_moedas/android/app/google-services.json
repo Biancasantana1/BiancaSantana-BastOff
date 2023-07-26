@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169305948365",
+    "project_id": "fir-flutter-a4a31",
+    "storage_bucket": "fir-flutter-a4a31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169305948365:android:8270856566383255726984",
+        "android_client_info": {
+          "package_name": "com.example.conversor_moedas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169305948365-pglpfokbipdvmoannkqc5m0a50669k67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6gOvzB8yBuVxI7hdWwl3CAPzbRFYt8qE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169305948365-pglpfokbipdvmoannkqc5m0a50669k67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

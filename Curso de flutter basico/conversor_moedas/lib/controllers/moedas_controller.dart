@@ -1,5 +1,6 @@
 import 'package:conversor_moedas/model/moedas_model.dart';
 import 'package:conversor_moedas/repositories/moedas_repository.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import '../model/moeda_model.dart';
 
@@ -12,11 +13,19 @@ class MoedasController {
   }
 
   Future<void> fetch() async {
-    Moedas moedasData = await _moedasRepository.getMoedas();
-    moedas.value = moedasData;
+    try {
+      Moedas moedasData = await _moedasRepository.getMoedas();
+      moedas.value = moedasData;
+    } catch (e, stackTrace) {
+      FirebaseCrashlytics.instance.recordError(e, stackTrace);
+    }
   }
 
   List<Moeda>? getCurrencyList() {
     return moedas.value?.results.currencies.currencyMap.values.toList();
+  }
+
+  void dispose() {
+    moedas.dispose();
   }
 }
