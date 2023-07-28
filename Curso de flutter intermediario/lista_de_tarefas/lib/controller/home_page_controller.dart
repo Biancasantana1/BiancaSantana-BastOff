@@ -1,8 +1,10 @@
 import 'package:intl/intl.dart';
+import '../firebase_messaging/custom_local_notification.dart';
 import '../interfaces/task_storage_interface.dart';
 import '../model/task_model.dart';
 import '../pages/home_page.dart';
 import '../widgets/custom_filter_widget.dart';
+import 'create_task_controller.dart';
 
 class HomePageController {
   bool isIconX = false;
@@ -13,8 +15,11 @@ class HomePageController {
   bool isEditingMode = false;
   Task? editingTask;
   int? editingIndex;
+  late final CreateTaskController createTaskController;
 
   final ITaskStorage taskStorage;
+  final CustomLocalNotification customLocalNotification =
+      CustomLocalNotification();
 
   HomePageController({required this.taskStorage}) {
     loadTasks();
@@ -31,14 +36,17 @@ class HomePageController {
   }
 
   void updateTask(Task task, [int? index]) {
+    String action = "editada";
     if (index != null) {
       tasks[index] = task;
     } else {
       tasks.add(task);
+      action = "criada";
     }
     sortTasks();
     isEditingMode = false;
     saveTasks();
+    customLocalNotification.taskNotification(task, action: action);
   }
 
   void toggleTaskStatus(int index) {

@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import '../controller/create_task_controller.dart';
 import '../controller/home_page_controller.dart';
@@ -21,6 +22,29 @@ class _HomePageState extends State<HomePage> {
   final HomePageController _controller = HomePageController(
     taskStorage: TaskStorageService(),
   );
+  late FirebaseRemoteConfig remoteConfig;
+
+  @override
+  void initState() {
+    super.initState();
+    remoteConfig = FirebaseRemoteConfig.instance;
+    _controller.taskStorage.loadTasks().then((loadedTasks) {
+      setState(() {
+        _controller.tasks = loadedTasks;
+      });
+    });
+  }
+
+  Future<void> initializeRemoteConfig() async {
+    try {
+      await remoteConfig.setDefaults(<String, dynamic>{
+        'show_done_tasks': false,
+      });
+      await remoteConfig.fetchAndActivate();
+    } catch (e) {
+      Exception("Error fetching remote config: $e");
+    }
+  }
 
   void _toggleIcon() {
     setState(() {
@@ -30,16 +54,6 @@ class _HomePageState extends State<HomePage> {
       } else {
         _controller.isIconX = !_controller.isIconX;
       }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.taskStorage.loadTasks().then((loadedTasks) {
-      setState(() {
-        _controller.tasks = loadedTasks;
-      });
     });
   }
 
@@ -148,61 +162,88 @@ class _HomePageState extends State<HomePage> {
                                   constraints:
                                       const BoxConstraints(maxHeight: 680),
                                   child: SingleChildScrollView(
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      clipBehavior: Clip.none,
-                                      padding: EdgeInsets.zero,
-                                      itemCount: _controller.tasks.length,
-                                      itemBuilder: (ctx, index) {
-                                        Task task = _controller.tasks[index];
-                                        if (_controller.statusFilter ==
-                                                TaskStatusFilter.all ||
-                                            (_controller.statusFilter ==
-                                                    TaskStatusFilter.done &&
-                                                _controller
-                                                    .tasks[index].isDone) ||
-                                            (_controller.statusFilter ==
-                                                    TaskStatusFilter.notDone &&
-                                                !_controller
-                                                    .tasks[index].isDone)) {
-                                          return CustomTaskItemWidget(
-                                            task: task,
-                                            deleteTask: (Task task) {
-                                              setState(() {
-                                                _controller.tasks.remove(task);
-                                              });
-                                            },
-                                            toggleTaskStatus: (Task task) {
-                                              setState(() {
-                                                final taskIndex = _controller
-                                                    .tasks
-                                                    .indexWhere(
-                                                        (t) => t == task);
-                                                _controller.tasks[taskIndex]
-                                                    .isDone = !task.isDone;
-                                              });
-                                            },
-                                            onEdit: (Task task) {
-                                              setState(() {
-                                                _controller.isEditingMode =
-                                                    true;
-                                                _controller.editingTask = task;
-                                                _controller.editingIndex =
-                                                    index;
-                                              });
+                                    child: FutureBuilder(
+                                      future: initializeRemoteConfig(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const CircularProgressIndicator();
+                                        } else {
+                                          bool showDoneTasks = remoteConfig
+                                              .getBool('show_done_tasks');
+                                          return ListView.builder(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            padding: EdgeInsets.zero,
+                                            itemCount: _controller.tasks.length,
+                                            itemBuilder: (ctx, index) {
+                                              Task task =
+                                                  _controller.tasks[index];
+                                              if (_controller.statusFilter ==
+                                                      TaskStatusFilter.all ||
+                                                  (_controller.statusFilter ==
+                                                          TaskStatusFilter
+                                                              .done &&
+                                                      task.isDone) ||
+                                                  (_controller.statusFilter ==
+                                                          TaskStatusFilter
+                                                              .notDone &&
+                                                      !task.isDone)) {
+                                                if (showDoneTasks ||
+                                                    !task.isDone) {
+                                                  return CustomTaskItemWidget(
+                                                    task: task,
+                                                    deleteTask: (Task task) {
+                                                      setState(() {
+                                                        _controller.tasks
+                                                            .remove(task);
+                                                      });
+                                                    },
+                                                    toggleTaskStatus:
+                                                        (Task task) {
+                                                      setState(() {
+                                                        final taskIndex =
+                                                            _controller.tasks
+                                                                .indexWhere(
+                                                                    (t) =>
+                                                                        t ==
+                                                                        task);
+                                                        _controller
+                                                                .tasks[taskIndex]
+                                                                .isDone =
+                                                            !task.isDone;
+                                                      });
+                                                    },
+                                                    onEdit: (Task task) {
+                                                      setState(() {
+                                                        _controller
+                                                                .isEditingMode =
+                                                            true;
+                                                        _controller
+                                                            .editingTask = task;
+                                                        _controller
+                                                                .editingIndex =
+                                                            index;
+                                                      });
+                                                    },
+                                                  );
+                                                } else {
+                                                  return Container();
+                                                }
+                                              } else {
+                                                return Container();
+                                              }
                                             },
                                           );
-                                        } else {
-                                          return Container();
                                         }
                                       },
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
             ),
