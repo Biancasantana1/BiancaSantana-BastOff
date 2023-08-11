@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:register/pages/client_list_page.dart';
 import '../component/custom_button_component.dart';
-import '../component/custom_dropdown_component.dart';
+import '../widgets/custom_dropdown_widget.dart';
 import '../component/custom_text_component.dart';
 import '../component/custom_text_title_component.dart';
 import '../component/custom_textfield_component.dart';
@@ -19,20 +19,27 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController passwordController;
   final ValueNotifier<String?> selectedClientType;
   final ValueNotifier<bool> showError;
+  final ValueNotifier<String?> emailError;
 
-  RegisterPage({super.key, this.client})
-      : nameController = TextEditingController(text: client?.name ?? ''),
+  RegisterPage({
+    super.key,
+    this.client,
+  })  : nameController = TextEditingController(text: client?.name ?? ''),
         emailController = TextEditingController(text: client?.email ?? ''),
         passwordController = TextEditingController(),
         selectedClientType = ValueNotifier<String?>(
             client?.type ?? "Selecione o tipo de cliente"),
-        showError = ValueNotifier<bool>(false);
+        showError = ValueNotifier<bool>(false),
+        emailError = ValueNotifier<String?>(null);
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: showError,
-      builder: (context, showErrorValue, _) {
+    final clientController =
+        Provider.of<ClientController>(context, listen: false);
+
+    return ValueListenableBuilder<String?>(
+      valueListenable: emailError,
+      builder: (context, emailErrorValue, _) {
         return Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
@@ -89,14 +96,16 @@ class RegisterPage extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const CustomTextComponent(text: "Tipo de cliente"),
                   const SizedBox(height: 8.0),
-                  CustomDropdownComponent(
-                      selectedClientType: selectedClientType),
+                  CustomDropdownWidget(
+                    selectedClientType: selectedClientType,
+                  ),
                   const SizedBox(height: 32.0),
-                  if (showErrorValue)
-                    const Text(
-                      'Preencha todos os dados',
-                      style: TextStyle(color: Colors.red),
+                  if (showError.value)
+                    Text(
+                      emailError.value ?? 'Preencha todos os dados',
+                      style: const TextStyle(color: Colors.red),
                     ),
+                  const SizedBox(height: 16.0),
                   Center(
                     child: CustomButtonComponent(
                       onPressed: () {
@@ -105,9 +114,28 @@ class RegisterPage extends StatelessWidget {
                             selectedClientType.value ==
                                 "Selecione o tipo de cliente") {
                           showError.value = true;
+                          emailError.value =
+                              "Por favor, preencha todos os campos";
                           return;
                         }
+
+                        if (!clientController
+                            .isValidEmail(emailController.text)) {
+                          showError.value = true;
+                          emailError.value =
+                              "Por favor, digite um e-mail válido";
+                          return;
+                        }
+
+                        if (clientController.isEmailDuplicate(
+                            emailController.text, client)) {
+                          showError.value = true;
+                          emailError.value = "O e-mail já está cadastrado";
+                          return;
+                        }
+
                         showError.value = false;
+                        emailError.value = null;
                         final newClient = Client(
                           name: nameController.text,
                           email: emailController.text,

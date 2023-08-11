@@ -12,6 +12,17 @@ class ClientController extends ChangeNotifier {
     filterClientsByName('');
   }
 
+  bool isValidEmail(String email) {
+    final RegExp regex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+    return regex.hasMatch(email);
+  }
+
+  bool isEmailDuplicate(String email, [Client? currentClient]) {
+    return _clients.any((client) =>
+        client.email.toLowerCase() == email.toLowerCase() &&
+        client != currentClient);
+  }
+
   void removeClient(Client client) {
     _clients.remove(client);
     filterClientsByName('');

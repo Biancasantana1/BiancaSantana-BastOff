@@ -18,7 +18,7 @@ class ClientListPage extends StatefulWidget {
 }
 
 class ClientListPageState extends State<ClientListPage> {
-  int itemCount = 6;
+  int itemCount = 5;
   late final TextEditingController searchController;
 
   @override
@@ -115,7 +115,7 @@ class ClientListPageState extends State<ClientListPage> {
                           background: Container(color: Colors.red),
                           child: Container(
                             width: MediaQuery.of(context).size.width,
-                            height: 71,
+                            height: 80,
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: const Color(0xFFF5F5F5),
@@ -145,6 +145,9 @@ class ClientListPageState extends State<ClientListPage> {
                                     ),
                                   ],
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 Text(
                                   client.email,
                                   style: const TextStyle(
@@ -168,10 +171,10 @@ class ClientListPageState extends State<ClientListPage> {
               CustomButtonComponent(
                 text: "Carregar mais",
                 height: 40,
-                width: 130,
+                width: 135,
                 onPressed: () {
                   setState(() {
-                    itemCount += 6;
+                    itemCount += 5;
                   });
                 },
               ),

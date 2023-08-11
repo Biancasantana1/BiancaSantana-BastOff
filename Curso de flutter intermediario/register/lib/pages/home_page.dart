@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register/pages/client_list_page.dart';
 import 'package:register/pages/register_page.dart';
-import '../component/custom_button_component.dart';
 import '../utils/assets_images_utils.dart';
 import '../widgets/custom_app_bar_widget.dart';
 import '../widgets/home_page/custom_section_photo_widget.dart';
@@ -54,14 +53,7 @@ class HomePage extends StatelessWidget {
               backgroundAsset: AssetsImg.positivoPerson,
               text: 'Gerencie os tipos de clientes agora mesmo!',
               buttonText: 'Ir agora',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterPage(),
-                  ),
-                );
-              },
+              onPressed: () {},
               textTopPosition: 0.06,
               buttonTopPosition: 0.12,
             ),
