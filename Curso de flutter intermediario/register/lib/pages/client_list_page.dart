@@ -11,7 +11,7 @@ import '../widgets/custom_app_bar_widget.dart';
 class ClientListPage extends StatefulWidget {
   final String? searchQuery;
 
-  const ClientListPage({Key? key, this.searchQuery}) : super(key: key);
+  const ClientListPage({super.key, this.searchQuery});
 
   @override
   ClientListPageState createState() => ClientListPageState();
