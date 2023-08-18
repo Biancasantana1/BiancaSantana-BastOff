@@ -1,3 +1,4 @@
 class API {
-  static const requestPokedex = 'https://pokeapi.co/api/v2/pokemon/';
+  static const String requestPokedex =
+      'https://pokeapi.co/api/v2/pokemon/?limit=15';
 }

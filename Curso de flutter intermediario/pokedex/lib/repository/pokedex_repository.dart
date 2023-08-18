@@ -8,7 +8,9 @@ import '../utils/api_utils.dart';
 class PokedexRepository implements IPokedexRepository {
   final IHttpService httpService;
 
-  PokedexRepository({required this.httpService});
+  PokedexRepository({
+    required this.httpService,
+  });
 
   @override
   Future<Pokedex> fetchPokemonData({String url = API.requestPokedex}) async {

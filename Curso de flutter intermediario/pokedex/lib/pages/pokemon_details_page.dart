@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+
 import '../model/pokemon_model.dart';
 import '../repository/pokedex_repository.dart';
 import '../service/http_service.dart';
+import '../utils/color_utils.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final String url;
 
-  const PokemonDetailsPage({super.key, required this.url});
+  const PokemonDetailsPage({
+    super.key,
+    required this.url,
+  });
 
   @override
   PokemonDetailsPageState createState() => PokemonDetailsPageState();
@@ -24,21 +29,57 @@ class PokemonDetailsPageState extends State<PokemonDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Detalhes do Pokémon')),
-      body: FutureBuilder<Pokemon>(
-        future: futurePokemonDetails,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final pokemon = snapshot.data!;
-            return Text(
-                'Nome: ${pokemon.name}, Altura: ${pokemon.height}, Peso: ${pokemon.weight}');
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+    return FutureBuilder<Pokemon>(
+      future: futurePokemonDetails,
+      builder: (context, snapshot) {
+        AppBar appBar = AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              snapshot.hasData
+                  ? Text(
+                      snapshot.data!.name,
+                      style: (const TextStyle(
+                        color: AppColors.black,
+                      )),
+                    )
+                  : const CircularProgressIndicator(),
+              snapshot.hasData
+                  ? Text(snapshot.data!.id.toString())
+                  : Container(),
+            ],
+          ),
+        );
+
+        if (snapshot.hasData) {
+          final pokemon = snapshot.data!;
+          return Scaffold(
+            appBar: appBar,
+            body: Column(
+              children: [
+                Container(),
+                Text(
+                    'Nome: ${pokemon.name}, Altura: ${pokemon.height}, Peso: ${pokemon.weight}'),
+                Image.network(
+                  pokemon.sprites.officialArtwork,
+                ),
+                Text('id: ${pokemon.id}')
+              ],
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Scaffold(
+            appBar: appBar,
+            body: Text("${snapshot.error}"),
+          );
+        }
+        return Scaffold(
+          appBar: appBar,
+          body: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }

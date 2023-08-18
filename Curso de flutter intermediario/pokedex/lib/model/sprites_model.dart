@@ -1,16 +1,18 @@
 class Sprites {
   Sprites({
-    required this.frontDefault,
+    required this.officialArtwork,
   });
-  late final String frontDefault;
+  late final String officialArtwork;
 
   Sprites.fromJson(Map<String, dynamic> json) {
-    frontDefault = json['front_default'];
+    officialArtwork = json['other']['official-artwork']['front_default'];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['front_default'] = frontDefault;
+    data['other'] = {
+      'official-artwork': {'front_default': officialArtwork}
+    };
     return data;
   }
 }

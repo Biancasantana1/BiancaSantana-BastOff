@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pokedex/pages/screen_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pokedex/pages/home_page.dart';
 import 'controller/pokemon_controller.dart';
@@ -9,7 +10,12 @@ void main() async {
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(const MyApp());
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => PokemonController(),
+        child: const MyApp(),
+      ),
+    );
   });
 }
 
@@ -18,17 +24,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => PokemonController(),
-      child: MaterialApp(
-        title: 'Pokedex',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.purple,
-          fontFamily: 'Poppins',
+    return MaterialApp(
+      title: 'Pokedex',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        home: const HomePage(),
       ),
+      home: const LoadingPage(),
     );
   }
 }
